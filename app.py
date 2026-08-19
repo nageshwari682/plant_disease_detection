@@ -5,7 +5,7 @@ import tensorflow as tf
 from PIL import Image
 import numpy as np
 
-MODEL_PATH = 'plant_model.h5'
+MODEL_PATH = 'plant_model_v2.h5'
 FILE_ID = '1pX1SXx2YHQQHkbCZhmp4nn_CYkk2hETu'
 URL = f'https://drive.google.com/uc?id={FILE_ID}'
 
