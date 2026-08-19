@@ -1,5 +1,4 @@
 import streamlit as st
-import gdown
 import os
 import tensorflow as tf
 from PIL import Image
@@ -11,47 +10,19 @@ st.set_page_config(
     layout="centered"
 )
 
-MODEL_PATH = 'plant_model_v2.keras'
-FILE_ID = '1pX1SXx2YHQQHkbCZhmp4nn_CYkk2hETu'
-URL = f'https://drive.google.com/uc?id={FILE_ID}'
-MIN_VALID_SIZE_BYTES = 1_000_000
-
-
-def download_model():
-    st.write("Downloading model... this takes 1 min first time")
-    gdown.download(URL, MODEL_PATH, quiet=False)
-
-
-def is_valid_model(path):
-    """Reject missing, incomplete, or non-Keras model downloads."""
-    if not os.path.exists(path):
-        return False
-    if os.path.getsize(path) < MIN_VALID_SIZE_BYTES:
-        return False
-    with open(path, "rb") as f:
-        header = f.read(8)
-    return header[:8] == b"\x89HDF\r\n\x1a\n" or header[:4] == b"PK\x03\x04"
-
-
-# If a previous run left behind a bad/partial download, remove it and retry
-if os.path.exists(MODEL_PATH) and not is_valid_model(MODEL_PATH):
-    os.remove(MODEL_PATH)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'plant_model_v2.keras')
 
 if not os.path.exists(MODEL_PATH):
-    download_model()
-
-if not is_valid_model(MODEL_PATH):
     st.error(
-        "Model download failed or returned an invalid file "
-        "(this usually means the Google Drive file isn't shared as "
-        "'Anyone with the link', or Drive served a warning page instead "
-        "of the file). Check the Drive sharing settings and redeploy."
+        f"Model file not found at {MODEL_PATH}. Make sure "
+        "plant_model_v2.keras is committed to the repo alongside app.py."
     )
     st.stop()
 
 model = tf.keras.models.load_model(MODEL_PATH)
 
-class_names = ['Pepper__bell___Bacterial_spot', ...]  
+class_names = ['Pepper__bell___Bacterial_spot', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']  # keep your full existing list here
 st.title("🌱 Plant Disease Detection System")
 st.write("Upload a plant leaf image to detect its condition using a CNN model.")
 
