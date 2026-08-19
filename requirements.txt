@@ -1,6 +1,6 @@
 streamlit==1.32.0
-tensorflow==2.15.0
+tensorflow-cpu==2.15.0
 numpy==1.26.4
 pillow==10.2.0
 opencv-python-headless==4.10.0.84
-matplotlib==3.8.3echo > requirements.txt
+matplotlib==3.8.3
