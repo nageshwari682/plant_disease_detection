@@ -1,19 +1,19 @@
 import streamlit as st
-    import gdown
-    import os
-    import tensorflow as tf
-    from PIL import Image
-    import numpy as np
+import gdown
+import os
+import tensorflow as tf
+from PIL import Image
+import numpy as np
 
-    MODEL_PATH = 'plant_model.h5'
-    FILE_ID = '1pX1SXx2YHQQHkbCZhmp4nn_CYkk2hETu'
-    URL = f'https://drive.google.com/uc?id={FILE_ID}'
+MODEL_PATH = 'plant_model.h5'
+FILE_ID = '1pX1SXx2YHQQHkbCZhmp4nn_CYkk2hETu'
+URL = f'https://drive.google.com/uc?id={FILE_ID}'
 
-    if not os.path.exists(MODEL_PATH):
-        st.write("Downloading model... this takes 1 min first time")
-        gdown.download(URL, MODEL_PATH, quiet=False)
+if not os.path.exists(MODEL_PATH):
+    st.write("Downloading model... this takes 1 min first time")
+    gdown.download(URL, MODEL_PATH, quiet=False)
         
-    model = tf.keras.models.load_model(MODEL_PATH)
+model = tf.keras.models.load_model(MODEL_PATH)
 
 class_names = ['Pepper__bell___Bacterial_spot', ...]  
 st.set_page_config(
