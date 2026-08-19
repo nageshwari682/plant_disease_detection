@@ -1,5 +1,5 @@
 streamlit
-joblib
-scikit-learngit
-pandas
+torch
+torchvision
+pillow
 numpy
