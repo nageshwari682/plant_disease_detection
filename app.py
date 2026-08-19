@@ -11,7 +11,7 @@ URL = f'https://drive.google.com/uc?id={FILE_ID}'
 
 if not os.path.exists(MODEL_PATH):
     st.write("Downloading model... this takes 1 min first time")
-    gdown.download(URL, MODEL_PATH, quiet=False)
+    gdown.download(URL, MODEL_PATH, quiet=False,fuzzy=True)
         
 model = tf.keras.models.load_model(MODEL_PATH)
 
