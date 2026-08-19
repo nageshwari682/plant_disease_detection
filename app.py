@@ -1,21 +1,19 @@
 import streamlit as st
+import gdown
+import os
 import tensorflow as tf
-import numpy as np
 from PIL import Image
+import numpy as np
 
-MODEL_PATH = "models/plant_disease_model.keras"
+    MODEL_PATH = 'plant_model.h5'
+    FILE_ID = '1pX1SXx2YHQQHkbCZhmp4nn_CYkk2hETu'
+    URL = f'https://drive.google.com/uc?id={FILE_ID}'
 
-class_names = [
-    "Black Scarf",
-    "Blackleg",
-    "Common Scab",
-    "Dry Rot",
-    "Healthy Potatoes",
-    "Miscellaneous",
-    "Pink Rot"
-]
-
-model = tf.keras.models.load_model(MODEL_PATH)
+    if not os.path.exists(MODEL_PATH):
+        st.write("Downloading model... this takes 1 min first time")
+        gdown.download(URL, MODEL_PATH, quiet=False)
+        
+    model = tf.keras.models.load_model(MODEL_PATH)
 
 st.set_page_config(
     page_title="Plant Disease Detection",
