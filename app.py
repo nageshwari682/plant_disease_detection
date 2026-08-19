@@ -1,9 +1,9 @@
 import streamlit as st
-import gdown
-import os
-import tensorflow as tf
-from PIL import Image
-import numpy as np
+    import gdown
+    import os
+    import tensorflow as tf
+    from PIL import Image
+    import numpy as np
 
     MODEL_PATH = 'plant_model.h5'
     FILE_ID = '1pX1SXx2YHQQHkbCZhmp4nn_CYkk2hETu'
@@ -15,6 +15,7 @@ import numpy as np
         
     model = tf.keras.models.load_model(MODEL_PATH)
 
+class_names = ['Pepper__bell___Bacterial_spot', ...]  
 st.set_page_config(
     page_title="Plant Disease Detection",
     page_icon="🌱",
